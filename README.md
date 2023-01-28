@@ -1,6 +1,11 @@
 # Description
 Solution to OddsJam challange from Vicenzo
 
+## Technologies
+- TypeScript
+- React
+- Tailwind CSS
+
 ## Frontend code assignment  
 Given the file `arbs.json` create a table that displays that information. You are free to choose any way to display that information. The goal is to covey to the user that there is an arbitrage opportunity. You are free to rearrange the data displayed in order to convey the most profitable opportunities. You are free to use whatever library / technology to solve this problem based on react.  
 
