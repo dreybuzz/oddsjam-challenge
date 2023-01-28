@@ -2,7 +2,7 @@
 Solution to OddsJam challange from Vicenzo
 
 # Solution Link
-[https://](https://oddsjam-challenge.netlify.app/)
+[https://oddsjam-challenge.netlify.app/](Demo)
 
 ## Technologies
 - TypeScript
