@@ -1,6 +1,9 @@
 # Description
 Solution to OddsJam challange from Vicenzo
 
+# Solution Link
+[https://](https://oddsjam-challenge.netlify.app/)
+
 ## Technologies
 - TypeScript
 - React
