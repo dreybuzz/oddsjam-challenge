@@ -9,5 +9,5 @@ body,
 }
 
 .hover-effect {
-  @apply ease-linear duration-200 cursor-pointer hover:bg-slate-200 hover:p-2 hover:rounded-md hover:text-black;
+  @apply cursor-pointer hover:bg-slate-200 hover:p-2 hover:rounded-md hover:text-black;
 }

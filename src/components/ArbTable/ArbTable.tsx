@@ -36,6 +36,10 @@ const HEADERS = [
   {
     title: "Live?",
   },
+
+  {
+    title: "Placed Bet?",
+  },
 ]
 
 type BestBooksProps = {
@@ -44,22 +48,26 @@ type BestBooksProps = {
 const BestBooks = ({ books }: BestBooksProps) => {
   const [otherBooksShown, setOtherBooksShown] = useState(false)
   return (
-    <div className="text-center flex flex-col items-center">
-      <div className="flex justify-center items-center">
-        <Pill title={books[0]} />
-        {books.length > 1 && (
+    <div className="text-center flex flex-col items-center justify-center">
+      <div className="flex justify-center items-center w-full relative">
+        <div className="w-32">
+          <Pill title={books[0]} />
+        </div>
+        {books.length > 1 ? (
           <span
-            className="material-symbols-outlined hover-effect ml-2"
+            className="material-symbols-outlined hover-effect self-end absolute right-0 top-1/2 -translate-y-1/2"
             onClick={() => setOtherBooksShown(() => !otherBooksShown)}>
             arrow_drop_down
           </span>
+        ) : (
+          <></>
         )}
       </div>
 
       <div
-        className={`bg-slate-500 w-full ease-linear duration-200 flex flex-col gap-2 rounded-md shadow-md shadow-black mt-4 ${
+        className={`bg-slate-500 w-full ease-linear duration-200  rounded-md shadow-md shadow-black ${
           otherBooksShown
-            ? "max-h-[30rem] overflow-scroll p-3"
+            ? "max-h-[30rem] overflow-scroll p-3 flex flex-col gap-2 mt-4"
             : "max-h-0 overflow-hidden"
         }`}>
         {books.slice(1).map((book) => (
@@ -70,24 +78,50 @@ const BestBooks = ({ books }: BestBooksProps) => {
   )
 }
 
+const PlacedBetToggle = () => {
+  const [placedBet, setPlacedBet] = useState(false)
+
+  return (
+    <div
+      className="flex justify-between items-center gap-4 h-full p-2"
+      onClick={() => setPlacedBet(!placedBet)}>
+      <span>Yes</span>
+      <div className="shadow-md shadow-black grow h-10 bg-slate-500 rounded-md overflow-hidden cursor-pointer min-w-[5rem] ">
+        <div
+          className={`bg-slate-900 h-full w-1/2 cursor-pointer flex justify-center items-center ease-linear duration-300 ${
+            placedBet ? "translate-x-full" : ""
+          }`}>
+          <span className="material-symbols-outlined text-emerald-500 t">
+            radio_button_checked
+          </span>
+        </div>
+      </div>
+      <span>No</span>
+    </div>
+  )
+}
+
 export default function ArbTable() {
   return (
     <table className="table-auto w-full">
+      {/* Headers */}
       <thead className="bg-slate-900 sticky top-0 z-10">
         <tr className="">
           {HEADERS.map((header) => (
-            <th key={uuidv4()} className="p-3 text-center">
+            <th key={uuidv4()} className="p-3 text-center whitespace-nowrap">
               {header.title}
             </th>
           ))}
         </tr>
       </thead>
+
+      {/* Body */}
       <tbody className="h-full">
         {arbMarkets.arbitrage_data.map((market, index) => (
           <tr
             className={`${
               index % 2 === 0 ? "bg-slate-800" : "bg-slate-500"
-            } text-center hover:bg-slate-100 cursor-pointer hover:text-black`}>
+            } text-center hover:bg-stone-400 cursor-pointer hover:text-black`}>
             <td className="arb-table-cell">
               <span className="hover-effect">{market.home_team}</span>
               <hr className="border-2 border-slate-600 w-full my-2" />
@@ -95,17 +129,20 @@ export default function ArbTable() {
             </td>
 
             {/* Sport */}
-            <td className="arb-table-cell capitalize">
-              <Pill
-                title={market.sport}
-                icon={
-                  "sports_" + (market.sport !== "boxing" ? market.sport : "mma")
-                }
-              />
+            <td className="arb-table-cell capitalize text-center">
+              <div className="w-28 mx-auto">
+                <Pill
+                  title={market.sport}
+                  icon={
+                    "sports_" +
+                    (market.sport !== "boxing" ? market.sport : "mma")
+                  }
+                />
+              </div>
             </td>
 
             {/* League */}
-            <td className="arb-table-cell hover-effect">{market.league}</td>
+            <td className="arb-table-cell">{market.league}</td>
 
             {/* Percentage */}
             <td className="arb-table-cell">
@@ -123,8 +160,14 @@ export default function ArbTable() {
             </td>
 
             {/* Live */}
-            <td className="arb-table-cell hover-effect h-fit max-w-[5rem]">
+            <td className="arb-table-cell h-fit">
               {market.is_live ? "Yes" : "No"}
+            </td>
+
+            {/* Placed Bet */}
+            <td className="arb-table-cell">
+              {/* {market.bet_placed ? "Yes" : "No"} */}
+              <PlacedBetToggle />
             </td>
           </tr>
         ))}

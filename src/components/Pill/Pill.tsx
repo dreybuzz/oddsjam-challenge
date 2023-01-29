@@ -14,9 +14,9 @@ export default function Pill({ title, color = "#fff", icon }: PillProps) {
   return (
     <div
       style={{ backgroundColor: color, color: "#000" }}
-      className={`w-full mx-auto py-2 px-4 cursor-pointer hover:invert ease-linear duration-200 rounded-md shadow-md shadow-black flex justify-center items-center gap-2`}>
+      className={`w-full bg-gray-300 p-2 text-black text-xs rounded-md text-center cursor-pointer font-semibold hover:bg-black hover:text-white ease-linear duration-200 hover:shadow-md hover:shadow-black truncate flex items-center justify-center gap-2`}>
       <span className="material-symbols-outlined">{icon}</span>
-      <span>{title}</span>
+      <span className="text-center">{title}</span>
     </div>
   )
 }
