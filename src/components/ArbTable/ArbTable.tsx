@@ -42,6 +42,13 @@ const HEADERS = [
   },
 ]
 
+const SPORTS_ICONS = {
+  Boxing: "sports_mma",
+  football: "sports_football",
+  basketball: "sports_basketball",
+  baseball: "sports_baseball",
+}
+
 type BestBooksProps = {
   books: string[]
 }
@@ -133,10 +140,7 @@ export default function ArbTable() {
               <div className="w-28 mx-auto">
                 <Pill
                   title={market.sport}
-                  icon={
-                    "sports_" +
-                    (market.sport !== "boxing" ? market.sport : "mma")
-                  }
+                  icon={SPORTS_ICONS[market.sport as keyof typeof SPORTS_ICONS]}
                 />
               </div>
             </td>
